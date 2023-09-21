@@ -14,12 +14,20 @@ contract SarchiCoin{
 
     address payable wallet;
 
+
+
     constructor(address payable _wallet)  {
         wallet = _wallet;
     }
 
+    // create a modifier
+    modifier haveMoney() {
+        require (msg.value > 0);
+        _;
+    }
+
     //  create a function to increment balance
-    function buySarchi() public payable{
+    function buySarchi() public haveMoney payable{
 
         balances[msg.sender] +=1;
 
